@@ -3,26 +3,29 @@ from collections import deque
 def bfs(graph, start):
     visited = set()
     queue = deque([start])
+
     visited.add(start)
 
+    print("BFS Traversal:", end=" ")
     while queue:
         node = queue.popleft()
-        print(node, end=' ')
+        print(node, end=" ")
 
-        for neighbor in graph.get(node, []):   # safe access
+        for neighbor in graph[node]:
             if neighbor not in visited:
                 visited.add(neighbor)
                 queue.append(neighbor)
+    print()
 
+if __name__ == "__main__":
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['A', 'D', 'E'],
+        'C': ['A', 'F'],
+        'D': ['B'],
+        'E': ['B', 'F'],
+        'F': ['C', 'E']
+    }
 
-n = int(input("Enter the number of nodes: "))
-graph = {}
-
-for i in range(n):
-    neighbours = list(map(int, input(f"Enter the neighbors of node {i} (space separated): ").split()))
-    graph[i] = neighbours
-
-start_node = int(input("Enter the starting node for BFS: "))
-print("BFS Traversal starting from node", start_node)
-
-bfs(graph, start_node)
+    start_node = input("Enter the start node: ")
+    bfs(graph, start_node)
