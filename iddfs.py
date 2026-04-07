@@ -1,17 +1,15 @@
-# Iterative Deepening Depth-First Search (IDDFS)
 
 def dls(graph, node, goal, depth, visited):
-    # If goal is found
+  
     if node == goal:
         return True
 
-    # If depth limit reached
+
     if depth == 0:
         return False
 
     visited.add(node)
 
-    # Explore neighbors
     for neighbor in graph.get(node, []):
         if neighbor not in visited:
             if dls(graph, neighbor, goal, depth - 1, visited):
@@ -21,7 +19,7 @@ def dls(graph, node, goal, depth, visited):
 
 
 def iddfs(graph, start, goal, max_depth):
-    # Iteratively increase depth
+   
     for depth in range(max_depth + 1):
         visited = set()
         print(f"Searching at depth: {depth}")
@@ -34,7 +32,7 @@ def iddfs(graph, start, goal, max_depth):
     return False
 
 
-# -------- MAIN PROGRAM --------
+
 if __name__ == "__main__":
     # Graph representation (Adjacency List)
     graph = {
